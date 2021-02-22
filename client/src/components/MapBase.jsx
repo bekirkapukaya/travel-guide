@@ -16,6 +16,7 @@ import AddLocationDialog from './AddLocationDialog';
 
 const MapBase = () => {
   const [open, setOpen] = useState(false);
+  const [currentCoordinates, setCurentCoordinates] = useState([]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -79,8 +80,8 @@ const MapBase = () => {
   map.addOverlay(popup);
 
   map.on('singleclick', function (event) {
-    var coordinate = event.coordinate;
-    console.log(coordinate);
+    var coordinates = event.coordinate;
+    setCurentCoordinates(coordinates);
     handleOpen();
   });
 
@@ -89,7 +90,12 @@ const MapBase = () => {
       <div id="map">
         <div id="popup"></div>
       </div>
-      <AddLocationDialog open={open} handleClose={handleClose} />;
+      <AddLocationDialog
+        open={open}
+        handleClose={handleClose}
+        currentCoordinates={currentCoordinates}
+      />
+      ;
     </>
   );
 };

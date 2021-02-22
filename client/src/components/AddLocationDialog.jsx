@@ -45,11 +45,17 @@ const validationSchema = yup.object({
     .required('Kategori gerekli...'),
 });
 
-const AddLocationDialog = ({ open, handleClose }) => {
+const AddLocationDialog = ({ open, handleClose, currentCoordinates }) => {
   const [file, setFile] = useState(null);
 
   const locationOnsubmit = (values) => {
-    console.log({ file, values });
+    console.log({ values, currentCoordinates, file });
+    clearForm();
+  };
+
+  const clearForm = (resetForm) => {
+    setFile(null);
+    handleClose();
   };
 
   const formik = useFormik({
@@ -59,8 +65,9 @@ const AddLocationDialog = ({ open, handleClose }) => {
       kategori: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       locationOnsubmit(values);
+      resetForm();
     },
   });
 
@@ -124,6 +131,8 @@ const AddLocationDialog = ({ open, handleClose }) => {
                 <MenuItem value={'Dogal_Guzellik'}>Doğal Güzellik</MenuItem>
               </Select>
 
+              <InputLabel>Koordinatlar:</InputLabel>
+              {currentCoordinates[0] + ` ` + currentCoordinates[1]}
               <br />
               <br />
               <FileBase64
@@ -137,7 +146,7 @@ const AddLocationDialog = ({ open, handleClose }) => {
           <Button type="submit" form="locationDialog" color="primary">
             Kaydet
           </Button>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={clearForm} color="secondary">
             Vazgeç
           </Button>
         </DialogActions>
