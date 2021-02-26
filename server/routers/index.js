@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import postRouter from './postRoutes';
+import locationRouters from './locationRouters';
 
 const rootRouter = Router();
 
+rootRouter.use('/locations', locationRouters);
 rootRouter.use('/', (req, res) => {
   res.status(200).json({
     status: 'Active',
     message: 'API service is running...',
   });
 });
-rootRouter.use('/posts', postRouter);
 
 export default rootRouter;

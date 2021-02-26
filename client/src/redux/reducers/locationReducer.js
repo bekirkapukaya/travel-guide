@@ -7,7 +7,7 @@ import {
   GET_SINGLE_LOCATION,
 } from '../actions/actionTypes';
 const locationReducer = (state = initialStates, action) => {
-  switch (actipn.payload) {
+  switch (action.payload) {
     case GET_LOCATION:
     case ADD_LOCATION:
     case REMOVE_LOCATION:

@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import router from './routers';
 import connectDatabase from './helpers/connectDatabase';
 
@@ -9,6 +10,8 @@ const { PORT } = process.env;
 
 const app = express();
 connectDatabase();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

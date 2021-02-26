@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addLocation } from '../redux/actions/locationActions';
 
 import {
   Button,
@@ -47,9 +49,10 @@ const validationSchema = yup.object({
 
 const AddLocationDialog = ({ open, handleClose, currentCoordinates }) => {
   const [file, setFile] = useState(null);
+  const dispatch = useDispatch()
 
   const locationOnsubmit = (values) => {
-    console.log({ values, currentCoordinates, file });
+    dispatch(addLocation({values,currentCoordinates,file}))
     clearForm();
   };
 

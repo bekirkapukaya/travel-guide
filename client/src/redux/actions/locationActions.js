@@ -16,17 +16,18 @@ import {
 export const getLocation = async () => {
   try {
     const { data } = getLocationApi();
-    dispach({
-      type: GET_LOCATION,
-      payload: data,
-    });
   } catch (err) {
     console.log(err);
   }
 };
 
-export const addLocation = async () => {
+export const addLocation = (location) => async (dispatch) => {
   try {
+    const { data } = addLocationApi(location);
+    dispatch({
+      type: ADD_LOCATION,
+      payload: data,
+    });
   } catch (err) {
     console.log(err);
   }
