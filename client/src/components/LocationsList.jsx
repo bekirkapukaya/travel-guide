@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import AddLocationTwoToneIcon from '@material-ui/icons/AddLocationTwoTone';
@@ -18,6 +19,7 @@ const notify = () =>
   });
 
 const LocationList = () => {
+  const locations = useSelector((state) => state.location.locations);
   return (
     <>
       <Button
@@ -34,7 +36,19 @@ const LocationList = () => {
         justify="space-around"
         alignItems="stretch"
       >
-        <Location />
+        {locations.map((location) => {
+          return (
+            <Location
+              key={location._id}
+              baslik={location.baslik}
+              aciklama={location.aciklama}
+              kategori={location.kategori}
+              goruntu={location.goruntu}
+              tarih={location.createdAt}
+              koordinatlar={location.koordinatlar}
+            />
+          );
+        })}
       </Grid>
       <ToastContainer />
     </>

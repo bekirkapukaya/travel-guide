@@ -18,4 +18,13 @@ export const createLocation = async (req, res) => {
   }
 };
 
-export const second = '1';
+export const getLocations = async (req, res) => {
+  try {
+    const locations = await Locations.find();
+    res.status(200).json(locations);
+  } catch (err) {
+    res.status(409).json({
+      message: err.message,
+    });
+  }
+};

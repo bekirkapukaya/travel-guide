@@ -1,9 +1,12 @@
 import { Router } from 'express';
-import { createLocation } from '../controllers/locationController';
+import {
+  createLocation,
+  getLocations,
+} from '../controllers/locationController';
 
 const locationRouter = Router();
 
-locationRouter.get('/');
+locationRouter.get('/', getLocations);
 locationRouter.post('/', createLocation);
 locationRouter.delete('/:id');
 locationRouter.patch('/:id');

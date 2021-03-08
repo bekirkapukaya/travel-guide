@@ -7,8 +7,9 @@ import {
   GET_SINGLE_LOCATION,
 } from '../actions/actionTypes';
 const locationReducer = (state = initialStates, action) => {
-  switch (action.payload) {
+  switch (action.type) {
     case GET_LOCATION:
+      return { ...state, locations: action.payload };
     case ADD_LOCATION:
     case REMOVE_LOCATION:
     case UPDATE_LOCATION:

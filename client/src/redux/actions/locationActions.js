@@ -13,9 +13,13 @@ import {
   getSingleLocationApi,
 } from '../../api';
 
-export const getLocation = async () => {
+export const getLocation = () => async (dispatch) => {
   try {
-    const { data } = getLocationApi();
+    const { data } = await getLocationApi();
+    dispatch({
+      type: GET_LOCATION,
+      payload: data,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -23,7 +27,7 @@ export const getLocation = async () => {
 
 export const addLocation = (location) => async (dispatch) => {
   try {
-    const { data } = addLocationApi(location);
+    const { data } = await addLocationApi(location);
     dispatch({
       type: ADD_LOCATION,
       payload: data,

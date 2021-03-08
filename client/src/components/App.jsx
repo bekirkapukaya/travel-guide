@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getLocation } from '../redux/actions/locationActions';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -76,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocation());
+  }, [dispatch]);
 
   return (
     <div className={classes.root}>
@@ -113,7 +119,6 @@ const App = () => {
         <Route exact path="/details" component={LocationDetails} />
         <Redirect from="/" to="/" />
       </Switch>
-      
     </div>
   );
 };

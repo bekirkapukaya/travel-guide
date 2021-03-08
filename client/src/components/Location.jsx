@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import noImage from '../images/noImage.jpg';
 
 import {
   Card,
@@ -7,6 +8,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Chip,
   Button,
   Typography,
 } from '@material-ui/core';
@@ -22,24 +24,31 @@ const useStyles = makeStyles({
   },
 });
 
-const Location = () => {
+const Location = (props) => {
   const classes = useStyles();
-
+  const { baslik, aciklama, kategori, goruntu, tarih, koordinatlar } = props;
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={goruntu || noImage}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {baslik}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {aciklama}
+          </Typography>
+          <Chip
+            label={`# ${kategori}`}
+            variant="outlined"
+            className={classes.chip}
+          />
+          <Typography variant="body2" color="textSecondary" component="p">
+            {tarih}
           </Typography>
         </CardContent>
       </CardActionArea>
