@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Map, View } from 'ol';
 import Overlay from 'ol/Overlay';
 import Feature from 'ol/Feature';
+import { toLonLat } from 'ol/proj';
 import Point from 'ol/geom/Point';
 import Vector from 'ol/layer/Vector';
 import Style from 'ol/style/Style';
@@ -56,8 +57,7 @@ const MapBase = () => {
   const map = new Map({
     target: null,
     view: new View({
-      projection: 'EPSG:4326',
-      center: [36, 40],
+      center: [3905418.768, 4796901.69],
       zoom: 6,
     }),
     layers: [
@@ -80,7 +80,7 @@ const MapBase = () => {
   map.addOverlay(popup);
 
   map.on('singleclick', function (event) {
-    var coordinates = event.coordinate;
+    var coordinates = toLonLat(event.coordinate);
     setCurentCoordinates(coordinates);
     handleOpen();
   });
