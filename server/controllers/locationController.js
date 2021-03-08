@@ -28,3 +28,39 @@ export const getLocations = async (req, res) => {
     });
   }
 };
+
+export const deleteLocation = async (req, res) => {
+  try {
+    const { id: _id } = req;
+    const location = await Locations.findByIdAndDelete(_id);
+    res.status(200).json(location);
+  } catch (err) {
+    res.status(409).json({
+      message: err.message,
+    });
+  }
+};
+
+export const updateLocation = async (req, res) => {
+  try {
+    const { id: _id } = req;
+    const location = await Locations.findByIdAndUpdate(_id);
+    res.status(200).json(location);
+  } catch (err) {
+    res.status(409).json({
+      message: err.message,
+    });
+  }
+};
+
+export const getSingleLocation = async (req, res) => {
+  try {
+    const { id: _id } = req;
+    const location = await Locations.findById(_id);
+    res.status(200).json(location);
+  } catch (err) {
+    res.status(409).json({
+      message: err.message,
+    });
+  }
+};
